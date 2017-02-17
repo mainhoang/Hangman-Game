@@ -1,0 +1,9 @@
+.image-wrapper div {
+	margin: 0;
+	background-color: red;
+}
+
+.square {
+	padding: 0 0 33% 0;
+	background-color: blue;
+}
