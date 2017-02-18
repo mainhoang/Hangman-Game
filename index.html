@@ -11,48 +11,41 @@
 	</head>
 	<body>
 
-  		<div class="container">
+  		<div class="game-wrapper container">
 
-			<div class="jumbotron"><!-- top & center -->
-	  			<h1 class="text-center"><strong>Let's Play Hangman!</strong></h1>
-	  			<hr>
-	  			<h1 id="word" class="text-center"></h1>
+			<div class="top jumbotron text-center"><!-- top & center -->
+	  			<h1 class="text-center">Feeling Fruity???</h1>
+	  			<hr>			
+				<h4>Press the Button to Play!</h4>
+			  	<button id="start-btn" type="button" class="btn btn-primary btn-lg">Start Game</button>	
+	  			<h1 id="word"></h1>	
 			</div>
 
 			<div class="row">
 
-	  			<div class="col-lg-6 col-md-6 col-sm-6"><!-- left -->
-	  				<div class="panel panel-default">
-		  				<div class="panel-body">
-			  				<h1 id="message" class="text-center">Feeling Fruity???</h1>
-		  				</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
+	  			<div class="col-lg-3 col-md-3 col-sm-3"><!-- left -->
+					<div class="left panel panel-default">
+						<div class="panel-heading text-center">
 							<h1 class="panel-title">The Stats...</h1>
 		  				</div>
 		  				<div class="panel-body">
-			  					<h4>Lives Left: <span id="lives"></span></h4>
-								<h4>Nope: <span id="nope"></span></h4>
-								<h4>Wins: <span id="wins">0</span></h4>
-								<h4>Losses: <span id="losses">0</span></h4>
+			  				<h4>Lives Left: <span id="lives"></span></h4>
+							<h4>Wins: <span id="wins">0</span></h4>
+							<h4>Losses: <span id="losses">0</span></h4>
 		  				</div>
 					</div>
 				</div>
 
-				<div class="col-lg-6 col-md-6 col-sm-6"><!-- right -->
-					<div class="image-wrapper">
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
-						<div class="square col-lg-4 col-md-4 col-sm-4"></div>
+				<div class="col-lg-9 col-md-9 col-sm-9"><!-- right -->
+					<div class="right panel panel-default">
+						<div class="panel-heading text-center">
+							<h1 class="panel-title">Letters Already Guessed:</h1>
+		  				</div>
+		  				<div class="panel-body text-center">
+		  					<h1 class="text-center" id="nope"></h1>
+		  				</div>
 					</div>
-	  			</div>
+				</div>
 
 			</div>
 

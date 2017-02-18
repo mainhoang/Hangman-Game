@@ -1,3 +1,4 @@
+
 var game = {
 
 	words: ["banana", "grapes", "orange", "apple", "pineapple", "blueberry"],
@@ -8,19 +9,31 @@ var game = {
 	wrongGuesses: [],
 	livesRemaining: 9,
 	winCounter: 0,
-	lossCounter: 1,
+	lossCounter: 0,
 	displayLives: document.getElementById("lives"),
 	displayWrong: document.getElementById("nope"),
 	displayWins: document.getElementById("wins"),
 	displayLosses: document.getElementById("losses"),
 	displayWord: document.getElementById("word"),
 	displayMessage: document.getElementById("message"),
+	button: document.getElementById("start-btn"),
+
+	assignBtn(){
+
+		document.getElementById("start-btn").addEventListener("click", function(){
+
+			game.startGame();
+
+		});
+
+	},
 
 	startGame(){
 
 		livesRemaining = 9; // begin with 9 lives
 		correctGuesses = [];	// begin with empty array
 		wrongGuesses = []; // begin with empty array
+		this.button.style.display = "none";
 
 		// picks a random element from the words[] & saves to theWord variable
 		theWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -67,10 +80,7 @@ var game = {
 				if(theWord[i] === letter){
 
 					correctGuesses[i] = letter;
-					console.log("letterInWord",letterInWord);
-					console.log("theWord[i]",theWord[i]);
-					console.log("correctGuesses[i]",correctGuesses[i]);
-					console.log("wrongGuesses[i]",wrongGuesses[i]);
+					
 				}
 			}
 		}
@@ -79,76 +89,63 @@ var game = {
 
 		if(!letterInWord){
 
-			console.log(letterInWord);
-
 			for(var i = 0;i < wrongGuesses.length;i++){
-				if(wrongGuesses == letter){
+
+				if(wrongGuesses[i] == letter){
+
 					alert("You've already picked that letter!");
 					duplicateLetter = true;
+
 				}
+
 			}
 
 		}
 
 		if(!letterInWord && !duplicateLetter){
 
-			play("../audio/wrong.mp3");
-			livesRemaining --;
+			// document.getElementById("myAudio").play();
+			livesRemaining--;
 			wrongGuesses.push(letter);
 
 		}
 
 	},
 
-	message(){
-		message.innerHTML = "You win!!!";
-	},
-
 	finishGame(){
 
 		this.displayWord.innerHTML = correctGuesses.join(" ");
 		this.displayLives.innerHTML = livesRemaining;
-		this.displayWrong.innerHTML = wrongGuesses.join(" , ");
-
-		// console.log(lettersInWord);
-		// console.log(correctGuesses);
+		this.displayWrong.innerHTML = wrongGuesses.join("  ");
 
 		if(lettersInWord.join(" ") === correctGuesses.join(" ")){
 
 			this.winCounter++;
 			this.displayWins.innerHTML = this.winCounter;
-			this.displayLosses.innerHTML = "0";
-			this.message();
-
+			alert("You win!"); 
 			this.startGame();
 
-		}else if(livesRemaining === 0){
+		}else if(wrongGuesses.length === 9){
 
-			this.displayLives = livesRemaining;
 			this.lossCounter ++;
 			this.displayLosses.innerHTML  = this.lossCounter;
 			this.displayWrong.innerHTML = "";
 			alert("No fruit for you!");  
-
-
-			// write a function to display "win" or "lose" text
-
-
-
 			this.startGame();
+			this.livesRemaining = 9;
+			this.displayLives = livesRemaining;
 
 		}
+
 	},
+
 };
 
-game.startGame();
+game.assignBtn();
 	
 document.onkeyup = function(event) {
-
 	
 	var code = event.keyCode; // saves keyCode of key to letter variable
-
-	console.log(code);
 
 	if(code < 65 || code > 90) { 
 
@@ -162,9 +159,8 @@ document.onkeyup = function(event) {
 		game.checkLetter(letter);
 		game.finishGame();
 
-		console.log("typed letter", letter);
-
 	}	
+
 };
 
 

@@ -1,9 +1,29 @@
-.image-wrapper div {
-	margin: 0;
-	background-color: red;
+body {
+	background-image: url("../images/orange-trees.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
-.square {
-	padding: 0 0 33% 0;
-	background-color: blue;
+#nope {
+	color: red;
+}
+
+#start-btn {
+	margin-top: 25px;
+}
+
+.game-wrapper {
+	margin-top: 40px;
+}
+
+.right {
+	height: 167px;
+}
+
+.top{
+	height: 344px;
+}
+
+.top, .left, .right {
+	opacity: 0.9;
 }
