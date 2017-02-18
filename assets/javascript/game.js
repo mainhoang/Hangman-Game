@@ -2,11 +2,10 @@ var game = {
 
 	words: ["banana", "grapes", "orange", "apple", "pineapple", "blueberry"],
 	theWord: "",
-	str: "",
 	lettersInWord: [],
 	spaces: 0,
-	correctGuessesAndSpaces: [],
-	inCorrect: [],
+	correctGuesses: [],
+	wrongGuesses: [],
 	livesRemaining: 9,
 	winCounter: 0,
 	lossCounter: 1,
@@ -15,12 +14,13 @@ var game = {
 	displayWins: document.getElementById("wins"),
 	displayLosses: document.getElementById("losses"),
 	displayWord: document.getElementById("word"),
+	displayMessage: document.getElementById("message"),
 
 	startGame(){
 
 		livesRemaining = 9; // begin with 9 lives
-		correctGuessesAndSpaces = [];	// begin with empty array
-		inCorrect = []; // begin with empty array
+		correctGuesses = [];	// begin with empty array
+		wrongGuesses = []; // begin with empty array
 
 		// picks a random element from the words[] & saves to theWord variable
 		theWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -36,14 +36,14 @@ var game = {
 		for(var i = 0; i < spaces; i++){
 
 			//push an underscore into the correctGuessesAndSpaces[]
-			correctGuessesAndSpaces.push("_");
+			correctGuesses.push("_");
 
 		}
 
 		// display the number of guesses/lives remaining
 		this.displayLives.innerHTML = livesRemaining;
 		// display underscores, separated with a space
-		this.displayWord.innerHTML = correctGuessesAndSpaces.join(" ");
+		this.displayWord.innerHTML = correctGuesses.join(" ");
 
 	},
 
@@ -59,42 +59,66 @@ var game = {
 
 			}
 		}
-		console.log(theWord[i]);
 
 		if(letterInWord){
 
-			for(i = 0; i < spaces; i++){
+			for(var i = 0; i < spaces; i++){
 
 				if(theWord[i] === letter){
 
-					correctGuessesAndSpaces[i] = letter;
+					correctGuesses[i] = letter;
+					console.log("letterInWord",letterInWord);
+					console.log("theWord[i]",theWord[i]);
+					console.log("correctGuesses[i]",correctGuesses[i]);
+					console.log("wrongGuesses[i]",wrongGuesses[i]);
 				}
+			}
+		}
 
+		var duplicateLetter = false;
+
+		if(!letterInWord){
+
+			console.log(letterInWord);
+
+			for(var i = 0;i < wrongGuesses.length;i++){
+				if(wrongGuesses == letter){
+					alert("You've already picked that letter!");
+					duplicateLetter = true;
+				}
 			}
 
-		}else{
+		}
 
+		if(!letterInWord && !duplicateLetter){
+
+			play("../audio/wrong.mp3");
 			livesRemaining --;
-			inCorrect.push(letter);
+			wrongGuesses.push(letter);
 
 		}
+
+	},
+
+	message(){
+		message.innerHTML = "You win!!!";
 	},
 
 	finishGame(){
 
-		this.displayWord.innerHTML = correctGuessesAndSpaces.join(" ");
+		this.displayWord.innerHTML = correctGuesses.join(" ");
 		this.displayLives.innerHTML = livesRemaining;
-		this.displayWrong.innerHTML = inCorrect.join(" ");
+		this.displayWrong.innerHTML = wrongGuesses.join(" , ");
 
-		console.log(lettersInWord);
-		console.log(correctGuessesAndSpaces);
+		// console.log(lettersInWord);
+		// console.log(correctGuesses);
 
-		if(lettersInWord.join(" ") === correctGuessesAndSpaces.join(" ")){
+		if(lettersInWord.join(" ") === correctGuesses.join(" ")){
 
 			this.winCounter++;
 			this.displayWins.innerHTML = this.winCounter;
 			this.displayLosses.innerHTML = "0";
-			alert("You win!!");
+			this.message();
 
 			this.startGame();
 
@@ -121,20 +145,19 @@ game.startGame();
 	
 document.onkeyup = function(event) {
 
-	// saves keyCode of key to letter variable
-	var code = event.keyCode;
+	
+	var code = event.keyCode; // saves keyCode of key to letter variable
 
-	console.log(letter);
+	console.log(code);
 
-	// if keyCode of key pressed is less than 65 or greater than 90 (A = 65 & Z = 90)...
-	if(code < 65 || code > 90) {
+	if(code < 65 || code > 90) { 
 
+		// if keyCode of key pressed is less than 65 or greater than 90 (A = 65 & Z = 90)...
 		alert("Please enter a letter, A to Z!");
 
 	}else{
-
-		// captures the key press, converts it to lowercase, and saves it to var letter
-		var letter = String.fromCharCode(event.keyCode).toLowerCase();
+		
+		var letter = String.fromCharCode(event.keyCode).toLowerCase(); // captures the key press, converts it to lowercase, and saves it to var letter
 
 		game.checkLetter(letter);
 		game.finishGame();
