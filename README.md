@@ -2,15 +2,11 @@
 
 UCLA Extension Bootcamp - Homework # 3
 
-## Instructions
-
 ### Overview
 
 In this assignment, you'll create one of two possible computer games: Hangman or Psychic. These apps will run in the browser, and feature dynamically updated HTML powered by your JavaScript code.
 
-
-
-### Hangman Game
+### Instructions
 
 1. [Watch the demo](hangman-game-demo.mov).
 
@@ -34,7 +30,7 @@ In this assignment, you'll create one of two possible computer games: Hangman or
 
 5. After the user wins/loses the game should automatically choose another word and make the user play it.
 
-##### Hangman Game Bonuses
+##### Bonuses
 
 1. Play a sound or song when the user guesses their word correctly, like in our demo.
 2. Write some stylish CSS rules to make a design that fits your game's theme.
@@ -45,7 +41,7 @@ In this assignment, you'll create one of two possible computer games: Hangman or
     * Remember: global variables, then objects, then calls.
   * Definitely talk with a TA or your instructor if you get tripped up during this challenge.
 
-## Technologies Used
+### Technologies Used
 * HTML
 * CSS
 * Bootstrap
